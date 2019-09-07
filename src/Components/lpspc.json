@@ -1,0 +1,387 @@
+{
+	"info": {
+		"_postman_id": "54133be3-9744-4c1b-8aee-92a7d855ccd1",
+		"name": "loraProxyServer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "signin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"5d5ec20aedc3268530f1659c\",\n\t\"u\": \"$2b$07$FSxd3aDsh1eBTvQxJhfTLOJL3tqdCSSEJLM4KVTXb3sz/K8sVXUXq\"\n}\n"
+				},
+				"url": {
+					"raw": "https://ec2-52-66-213-31.ap-south-1.compute.amazonaws.com:7452/cmVzdGZ1bCBhcGk/cmlybyBsb3JhIHByb3h5IHNlcnZlciA/signin",
+					"protocol": "https",
+					"host": [
+						"ec2-52-66-213-31",
+						"ap-south-1",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "7452",
+					"path": [
+						"cmVzdGZ1bCBhcGk",
+						"cmlybyBsb3JhIHByb3h5IHNlcnZlciA",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deviceList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fb1cdf7e-73c6-4b84-8d41-7ee43b8d3162",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkNWVjMjBhZWRjMzI2ODUzMGYxNjU5YyIsInUiOiIkMmIkMDckRlN4ZDNhRHNoMWVCVHZReEpoZlRMT0pMM3RxZENTU0VKTE00S1ZUWGIzc3ovSzhzVlhVWHEiLCJpYXQiOjE1NjY2MjMzMTMsImV4cCI6MTU2NjY1MjExM30.ErezXFXAwHehkS3RHALoUyv1eHsLfwUNqCz9bDVe878"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://ec2-52-66-213-31.ap-south-1.compute.amazonaws.com:7452/cmVzdGZ1bCBhcGk/cmlybyBsb3JhIHByb3h5IHNlcnZlciA/5d5ec20aedc3268530f1659c/2/deviceList?limit=100&offset=0",
+					"protocol": "https",
+					"host": [
+						"ec2-52-66-213-31",
+						"ap-south-1",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "7452",
+					"path": [
+						"cmVzdGZ1bCBhcGk",
+						"cmlybyBsb3JhIHByb3h5IHNlcnZlciA",
+						"5d5ec20aedc3268530f1659c",
+						"2",
+						"deviceList"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "100"
+						},
+						{
+							"key": "applicationID",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add device",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d0d7ccea-260b-4716-b6ae-3ab9d02f5419",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkNWVjMzBmZWRjMzI2ODUzMGYxNjU5ZCIsInUiOiIkMmIkMDckQXMxRHViNzJoQ3IybUdIc0NPUFJvTzR6RDF4c3lDTjM1Q3ROSHhEejZLVTV1VXQ0V3FJYzYiLCJpYXQiOjE1NjY1NjcwMzYsImV4cCI6MTU2NjU5NTgzNn0.N4mdLqT9Pn1akJRjABdKkrjl5xIWyrDz0guyFv19bUk"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"devEUI\": \"3934353771378d10\",\n\t\"devAct\": \"otaa\",\n\t\"devAddr\": \"0100000a\",\n\t\"devAppKey\":\"00000000000000000000000000000005\",\n\t\"devAppSkey\":\"00000000000000000000000000000007\",\n\t\"devNwkSkey\":\"00000000000000000000000000000005\",\n\t\"frameCountCheck\": false\n}"
+				},
+				"url": {
+					"raw": "https://ec2-52-66-213-31.ap-south-1.compute.amazonaws.com:7452/cmVzdGZ1bCBhcGk/cmlybyBsb3JhIHByb3h5IHNlcnZlciA/5cc90f5e284481744582f96e/1/addDevice",
+					"protocol": "https",
+					"host": [
+						"ec2-52-66-213-31",
+						"ap-south-1",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "7452",
+					"path": [
+						"cmVzdGZ1bCBhcGk",
+						"cmlybyBsb3JhIHByb3h5IHNlcnZlciA",
+						"5cc90f5e284481744582f96e",
+						"1",
+						"addDevice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getDeviceData",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkNWVjMjBhZWRjMzI2ODUzMGYxNjU5YyIsInUiOiIkMmIkMDckRlN4ZDNhRHNoMWVCVHZReEpoZlRMT0pMM3RxZENTU0VKTE00S1ZUWGIzc3ovSzhzVlhVWHEiLCJpYXQiOjE1NjY2MjMzODMsImV4cCI6MTU2NjY1MjE4M30.zky-dXGUmLECdShcjZEAFANTPEPcnAfFuXaVSX3fsSo"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://ec2-52-66-213-31.ap-south-1.compute.amazonaws.com:7452/cmVzdGZ1bCBhcGk/cmlybyBsb3JhIHByb3h5IHNlcnZlciA/5d5ec20aedc3268530f1659c/2/737374706c000ff5/getDeviceData",
+					"protocol": "https",
+					"host": [
+						"ec2-52-66-213-31",
+						"ap-south-1",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "7452",
+					"path": [
+						"cmVzdGZ1bCBhcGk",
+						"cmlybyBsb3JhIHByb3h5IHNlcnZlciA",
+						"5d5ec20aedc3268530f1659c",
+						"2",
+						"737374706c000ff5",
+						"getDeviceData"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setDeviceData",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkNWVjMzBmZWRjMzI2ODUzMGYxNjU5ZCIsInUiOiIkMmIkMDckQXMxRHViNzJoQ3IybUdIc0NPUFJvTzR6RDF4c3lDTjM1Q3ROSHhEejZLVTV1VXQ0V3FJYzYiLCJpYXQiOjE1NjY1NjcwMzYsImV4cCI6MTU2NjU5NTgzNn0.N4mdLqT9Pn1akJRjABdKkrjl5xIWyrDz0guyFv19bUk"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"data\":\"AQ==\",\n\t\"port\":2\n}"
+				},
+				"url": {
+					"raw": "https://ec2-52-66-213-31.ap-south-1.compute.amazonaws.com:7452/cmVzdGZ1bCBhcGk/cmlybyBsb3JhIHByb3h5IHNlcnZlciA/5cc90f5e284481744582f96e/1/0600000000000000/setDeviceData",
+					"protocol": "https",
+					"host": [
+						"ec2-52-66-213-31",
+						"ap-south-1",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "7452",
+					"path": [
+						"cmVzdGZ1bCBhcGk",
+						"cmlybyBsb3JhIHByb3h5IHNlcnZlciA",
+						"5cc90f5e284481744582f96e",
+						"1",
+						"0600000000000000",
+						"setDeviceData"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteDevice",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkNWVjMzBmZWRjMzI2ODUzMGYxNjU5ZCIsInUiOiIkMmIkMDckQXMxRHViNzJoQ3IybUdIc0NPUFJvTzR6RDF4c3lDTjM1Q3ROSHhEejZLVTV1VXQ0V3FJYzYiLCJpYXQiOjE1NjY1NjcwMzYsImV4cCI6MTU2NjU5NTgzNn0.N4mdLqT9Pn1akJRjABdKkrjl5xIWyrDz0guyFv19bUk"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"devEUI\": \"3934353771378d10\"\n}"
+				},
+				"url": {
+					"raw": "https://ec2-52-66-213-31.ap-south-1.compute.amazonaws.com:7452/cmVzdGZ1bCBhcGk/cmlybyBsb3JhIHByb3h5IHNlcnZlciA/5cc90f5e284481744582f96e/1/delDevice",
+					"protocol": "https",
+					"host": [
+						"ec2-52-66-213-31",
+						"ap-south-1",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "7452",
+					"path": [
+						"cmVzdGZ1bCBhcGk",
+						"cmlybyBsb3JhIHByb3h5IHNlcnZlciA",
+						"5cc90f5e284481744582f96e",
+						"1",
+						"delDevice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "gatewayList",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkNWVjMjBhZWRjMzI2ODUzMGYxNjU5YyIsInUiOiIkMmIkMDckRlN4ZDNhRHNoMWVCVHZReEpoZlRMT0pMM3RxZENTU0VKTE00S1ZUWGIzc3ovSzhzVlhVWHEiLCJpYXQiOjE1NjY2MjMzMTMsImV4cCI6MTU2NjY1MjExM30.ErezXFXAwHehkS3RHALoUyv1eHsLfwUNqCz9bDVe878"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://ec2-52-66-213-31.ap-south-1.compute.amazonaws.com:7452/cmVzdGZ1bCBhcGk/cmlybyBsb3JhIHByb3h5IHNlcnZlciA/5d5ec30fedc3268530f1659d/1/gatewayList?limit=100&offset=0",
+					"protocol": "https",
+					"host": [
+						"ec2-52-66-213-31",
+						"ap-south-1",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "7452",
+					"path": [
+						"cmVzdGZ1bCBhcGk",
+						"cmlybyBsb3JhIHByb3h5IHNlcnZlciA",
+						"5d5ec30fedc3268530f1659d",
+						"1",
+						"gatewayList"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "100"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "gatewayStatus",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkNWVjMjBhZWRjMzI2ODUzMGYxNjU5YyIsInUiOiIkMmIkMDckRlN4ZDNhRHNoMWVCVHZReEpoZlRMT0pMM3RxZENTU0VKTE00S1ZUWGIzc3ovSzhzVlhVWHEiLCJpYXQiOjE1NjY2MjMzODMsImV4cCI6MTU2NjY1MjE4M30.zky-dXGUmLECdShcjZEAFANTPEPcnAfFuXaVSX3fsSo"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://ec2-52-66-213-31.ap-south-1.compute.amazonaws.com:7452/cmVzdGZ1bCBhcGk/cmlybyBsb3JhIHByb3h5IHNlcnZlciA/5d5ec30fedc3268530f1659d/1/gatewayStatus?id=b827ebfffe36e8be",
+					"protocol": "https",
+					"host": [
+						"ec2-52-66-213-31",
+						"ap-south-1",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "7452",
+					"path": [
+						"cmVzdGZ1bCBhcGk",
+						"cmlybyBsb3JhIHByb3h5IHNlcnZlciA",
+						"5d5ec30fedc3268530f1659d",
+						"1",
+						"gatewayStatus"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "b827ebfffe36e8be"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

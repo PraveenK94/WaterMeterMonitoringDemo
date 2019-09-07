@@ -1,0 +1,70 @@
+.bashboardCnt {
+  display: flex;
+}
+.toolbar {
+  padding-right: 24;
+}
+.paper {
+  padding: spacing(2);
+  display: "flex";
+  overflow: "auto";
+  flex-direction: "column";
+}
+.menuButton {
+  margin-right: 36;
+}
+.menuButtonHidden {
+  display: none;
+}
+.title {
+  flex-grow: 1;
+}
+.fixedHeight {
+  height: 240;
+}
+.root {
+  display: flex;
+}
+.toolbar {
+  padding-right: 24;
+}
+.toolbarIcon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 8px;
+}
+.appBarShift {
+  margin-left: drawerWidth;
+  width: calc(100% - 240px);
+}
+.menuButton {
+  margin-right: 36;
+}
+.menuButtonHidden {
+  display: none;
+}
+.title {
+  flex-grow: 1;
+}
+.drawerPaper {
+  position: relative;
+  white-space: nowrap;
+  width: drawerWidth;
+}
+.drawerPaperClose {
+  overflow-x: hidden;
+}
+.content {
+  flex-grow: 1;
+  height: 100vh;
+  overflow: auto;
+}
+.paper {
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+}
+.fixedHeight {
+  height: 240;
+}
