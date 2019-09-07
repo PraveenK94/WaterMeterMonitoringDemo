@@ -186,9 +186,7 @@ class Dashboard extends React.Component {
       <ThemeProvider theme={theme}>
         <div className="bashboardCnt">
           <CssBaseline data={[10, 20]} />
-
           <Header />
-
           <Sidenav />
 
           <main

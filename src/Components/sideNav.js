@@ -21,7 +21,7 @@ export default class Sidnav extends React.Component {
       <Drawer variant="permanent" open={this.open}>
         <div>
           <IconButton>
-            <ChevronLeftIcon onClick={this.togleNav} />
+            <ChevronLeftIcon />
           </IconButton>
         </div>
         <Divider />
