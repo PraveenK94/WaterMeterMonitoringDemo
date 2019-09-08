@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles, createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
@@ -10,10 +11,8 @@ import Chart from "./Chart";
 import Orders from "./payment";
 import Values from "./Values";
 import axios from "axios";
-
 import Header from "./Header";
 import Sidenav from "./sideNav";
-
 import "./Dashboard.css";
 
 const drawerWidth = 240;
@@ -128,37 +127,14 @@ const theme = createMuiTheme({
   }
 });
 
-const data = {
-  labels: ["", "", "", "", "", "", ""],
-  datasets: [
-    {
-      fill: false,
-      lineTension: 0.1,
-      backgroundColor: "rgba(75,192,192,0.4)",
-      borderColor: "rgba(75,192,192,1)",
-      borderCapStyle: "butt",
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: "miter",
-      pointBorderColor: "rgba(75,192,192,1)",
-      pointBackgroundColor: "#fff",
-      pointBorderWidth: 1,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "rgba(75,192,192,1)",
-      pointHoverBorderColor: "rgba(220,220,220,1)",
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
-      data: [83, 93, 88, 98, 90, 75, 96]
-    }
-  ]
-};
-
 class Dashboard extends React.Component {
   constructor() {
     super();
     this.state = {
-      open: true
+      redirect: false,
+      datetime: "",
+      deviceName: "",
+      levelPct: ""
     };
   }
 
@@ -176,12 +152,19 @@ class Dashboard extends React.Component {
         }
       )
       .then(res => {
+        this.setState({ redirect: true });
         const device_data = res.data;
         console.log(device_data);
       });
   }
 
   render() {
+    const { redirect } = this.state;
+    const tok = localStorage.getItem("token");
+    const { path } = { from: "/SignIn" };
+    if (!redirect) {
+      return <BrowserRouter to={path} />;
+    }
     return (
       <ThemeProvider theme={theme}>
         <div className="bashboardCnt">
@@ -208,15 +191,17 @@ class Dashboard extends React.Component {
                 {/* Chart */}
                 <Grid item xs={12} md={8} lg={9}>
                   <Paper>
-                    <Chart data={data} />
+                    <Chart />
                   </Paper>
                 </Grid>
+
                 {/* Recent Deposits */}
                 <Grid item xs={12} md={4} lg={3}>
                   <Paper className={clsx(theme.paper, theme.fixedHeight)}>
                     <Values />
                   </Paper>
                 </Grid>
+
                 {/* Recent Orders */}
                 <Grid item xs={12}>
                   <Paper className="paper">
@@ -231,5 +216,4 @@ class Dashboard extends React.Component {
     );
   }
 }
-
 export default Dashboard;

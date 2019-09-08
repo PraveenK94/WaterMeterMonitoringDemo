@@ -5,6 +5,7 @@ const data = {
   labels: ["", "", "", "", "", "", ""],
   datasets: [
     {
+      label: "Consumption trends",
       fill: false,
       lineTension: 0.1,
       backgroundColor: "rgba(75,192,192,0.4)",
@@ -22,7 +23,7 @@ const data = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: [83, 93, 88, 98, 90, 75, 96]
+      data: [83, 93, 88, 98, 90, 85, 93]
     }
   ]
 };

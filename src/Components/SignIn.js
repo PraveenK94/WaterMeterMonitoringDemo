@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import history from "../history";
+
+import { withRouter, Route } from "react-router-dom";
+
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -19,7 +22,8 @@ export class SignIn extends Component {
     this.state = {
       email: "",
       password: "",
-      errors: {}
+      errors: {},
+      redirect: false
     };
   }
   validateForm() {
@@ -30,6 +34,10 @@ export class SignIn extends Component {
     this.setState({
       [event.target.id]: event.target.value
     });
+  };
+
+  onisLoggedIn = () => {
+    this.setState({ redirect: true });
   };
 
   onSubmit = event => {
@@ -57,14 +65,22 @@ export class SignIn extends Component {
       .then(res => {
         if (res.status === 200) {
           localStorage.setItem("token", res.data.token);
-          console.log("toke", localStorage.getItem("token"));
-          history.push("/Dashboard");
+          console.log("token", localStorage.getItem("token"));
           console.log(res.data);
+          console.log(this.state.redirect);
+          if (this.onisLoggedIn) {
+            history.push("/Dashboard");
+            return <Route exact path="/Dashboard" component={Dashboard} />;
+          }
         } else {
           const error = new Error(res.error);
           throw error;
         }
       });
+  };
+
+  onLogout = event => {
+    this.setState({ redirect: false });
   };
 
   render() {
@@ -101,7 +117,7 @@ export class SignIn extends Component {
         <CssBaseline />
         <div className={useStyles.paper}>
           <Typography component="h1" variant="h5">
-            Smart Metering System
+            Water Meter Monitoring
           </Typography>
           <Typography component="h1" variant="h5">
             Sign in
@@ -143,7 +159,7 @@ export class SignIn extends Component {
                 variant="contained"
                 color="primary"
                 className={useStyles.submit}
-                onClick={Dashboard}
+                onClick={this.onSubmit}
                 refresh="value"
               >
                 Sign In
@@ -164,4 +180,4 @@ export class SignIn extends Component {
   }
 }
 
-export default SignIn;
+export default withRouter(SignIn);

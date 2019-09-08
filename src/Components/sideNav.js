@@ -4,7 +4,7 @@ import Divider from "@material-ui/core/Divider";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
-import { mainListItems, secondaryListItems } from "./listItems";
+import { mainListItems } from "./listItems";
 
 export default class Sidnav extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ export default class Sidnav extends React.Component {
   };
   render() {
     return (
-      <Drawer variant="permanent" open={this.open}>
+      <Drawer variant="permanent" open={this.togleNav}>
         <div>
           <IconButton>
             <ChevronLeftIcon />
@@ -27,7 +27,6 @@ export default class Sidnav extends React.Component {
         <Divider />
         <List>{mainListItems}</List>
         <Divider />
-        <List>{secondaryListItems}</List>
       </Drawer>
     );
   }

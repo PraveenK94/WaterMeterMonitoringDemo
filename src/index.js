@@ -1,18 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Router, Route } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import history from "./history";
-import Dashboard from "./Components/Dashboard";
 import SignIn from "./Components/SignIn";
+import Dashboard from "./Components/Dashboard";
 
 ReactDOM.render(
   <Router history={history}>
     <div className="App">
-      <Route exact path="/" component={SignIn} refresh="  true" />
-      <Route exact path="/Dashboard" component={Dashboard} />
+      <Switch>
+        <Route exact path="/" component={SignIn} />
+        <Route exact path="/Dashboard" component={Dashboard} />
+      </Switch>
     </div>
   </Router>,
 
