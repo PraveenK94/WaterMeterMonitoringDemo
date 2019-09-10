@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import history from "../history";
-
 import { withRouter, Route } from "react-router-dom";
-
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -160,7 +158,6 @@ export class SignIn extends Component {
                 color="primary"
                 className={useStyles.submit}
                 onClick={this.onSubmit}
-                refresh="value"
               >
                 Sign In
               </Button>
