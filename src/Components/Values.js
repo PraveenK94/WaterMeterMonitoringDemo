@@ -34,13 +34,12 @@ export class Values extends Component {
     return (
       <React.Fragment>
         <Title>Unit consumed</Title>
-        <Typography component="p" variant="h4">
-          320.48
+        <Typography component="p" variant="h6">
+          432.48Kl
         </Typography>
-        <Typography
-          color="textSecondary"
-          className={useStyles.unitContext}
-        ></Typography>
+        <Typography color="textSecondary" className={useStyles.unitContext}>
+          Details
+        </Typography>
       </React.Fragment>
     );
   }
