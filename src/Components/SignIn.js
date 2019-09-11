@@ -55,7 +55,8 @@ export class SignIn extends Component {
         },
         {
           Headers: {
-            Accept: "*/*",
+            "Access-Control-Allow-Origin": "*/*",
+            "Access-Control-Allow-Headers": "X-Requested-With, Content-Type",
             "Content-Type": "Appliction/json"
           }
         }
