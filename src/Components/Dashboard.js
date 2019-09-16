@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import clsx from "clsx";
-import { makeStyles, createMuiTheme } from "@material-ui/core/styles";
+import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
@@ -31,14 +31,14 @@ class Dashboard extends React.Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     let token = sessionStorage.getItem("token");
 
     if (token === null) {
       this.setState({ redirect: true });
       return;
     }
-    axios
+    await axios
       .get(
         `https://ec2-52-66-213-31.ap-south-1.compute.amazonaws.com:7452/cmVzdGZ1bCBhcGk/cmlybyBsb3JhIHByb3h5IHNlcnZlciA/5d5ec20aedc3268530f1659c/2/737374706c000ff5/getDeviceData`,
         {
@@ -61,68 +61,6 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const useStyles = makeStyles(theme => ({
-      toolbar: {
-        paddingRight: 24 // keep right padding when drawer closed
-      },
-      toolbarIcon: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "flex-end",
-        padding: "0 8px",
-        ...theme.mixins.toolbar
-      },
-      appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-        transition: theme.transitions.create(["width", "margin"], {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen
-        })
-      },
-      appBarShift: {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(["width", "margin"], {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.enteringScreen
-        })
-      },
-      drawerPaper: {
-        position: "relative",
-        whiteSpace: "nowrap",
-        width: drawerWidth,
-        transition: theme.transitions.create("width", {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.enteringScreen
-        })
-      },
-      drawerPaperClose: {
-        overflowX: "hidden",
-        transition: theme.transitions.create("width", {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen
-        }),
-        width: theme.spacing(7),
-        [theme.breakpoints.up("sm")]: {
-          width: theme.spacing(9)
-        }
-      },
-      appBarSpacer: theme.mixins.toolbar,
-      content: {
-        flexGrow: 1,
-        height: "100vh",
-        overflow: "auto"
-      },
-      container: {
-        paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4)
-      },
-
-      fixedHeight: {
-        height: 240
-      }
-    }));
-
     const theme = createMuiTheme({
       root: {
         display: "flex"
@@ -200,14 +138,11 @@ class Dashboard extends React.Component {
               }}
             >
               <Grid container spacing={3}>
-                {/* Chart */}
                 <Grid item xs={12} md={8} lg={9}>
                   <Paper>
                     <Chart />
                   </Paper>
                 </Grid>
-
-                {/* Recent Deposits */}
                 <Grid item xs={12} md={4} lg={3}>
                   <Paper className={clsx(theme.paper, theme.fixedHeight)}>
                     <Values />
@@ -222,8 +157,6 @@ class Dashboard extends React.Component {
                     </div>
                   </Paper>
                 </Grid>
-
-                {/* Recent Orders */}
                 <Grid item xs={12}>
                   <Paper className="paper">
                     <Orders />

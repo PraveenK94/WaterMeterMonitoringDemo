@@ -28,24 +28,24 @@ export class SignIn extends Component {
     return this.state.email.length > 0 && this.state.password.length > 0;
   }
 
-  onChange = event => {
+  onChange = async event => {
     this.setState({
       [event.target.id]: event.target.value
     });
   };
 
-  onisLoggedIn = () => {
+  onisLoggedIn = async () => {
     this.setState({ redirect: true });
   };
 
-  onSubmit = event => {
+  onSubmit = async event => {
     event.preventDefault();
 
     const email = this.state.email;
     const password = this.state.password;
 
     if (email === "admin" && password === "admin") {
-      axios
+      await axios
         .post(
           `https://ec2-52-66-213-31.ap-south-1.compute.amazonaws.com:7452/cmVzdGZ1bCBhcGk/cmlybyBsb3JhIHByb3h5IHNlcnZlciA/signin`,
           {
@@ -64,8 +64,6 @@ export class SignIn extends Component {
           if (res.status === 200) {
             sessionStorage.setItem("token", res.data.token);
             console.log("token", sessionStorage.getItem("token"));
-            console.log(res.data);
-            console.log(this.state.redirect);
             if (this.onisLoggedIn) {
               history.push("/Dashboard");
               return <Route exact path="/Dashboard" component={Dashboard} />;
