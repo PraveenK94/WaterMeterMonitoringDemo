@@ -55,7 +55,7 @@ export class SignIn extends Component {
         },
         {
           Headers: {
-            "Access-Control-Allow-Origin": "*/*",
+            "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "X-Requested-With, Content-Type",
             "Content-Type": "Appliction/json"
           }
@@ -63,8 +63,8 @@ export class SignIn extends Component {
       )
       .then(res => {
         if (res.status === 200) {
-          localStorage.setItem("token", res.data.token);
-          console.log("token", localStorage.getItem("token"));
+          sessionStorage.setItem("token", res.data.token);
+          console.log("token", sessionStorage.getItem("token"));
           console.log(res.data);
           console.log(this.state.redirect);
           if (this.onisLoggedIn) {
@@ -76,10 +76,6 @@ export class SignIn extends Component {
           throw error;
         }
       });
-  };
-
-  onLogout = event => {
-    this.setState({ redirect: false });
   };
 
   render() {

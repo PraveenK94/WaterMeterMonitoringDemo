@@ -32,7 +32,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    let token = localStorage.getItem("token");
+    let token = sessionStorage.getItem("token");
 
     if (token === null) {
       this.setState({ redirect: true });
