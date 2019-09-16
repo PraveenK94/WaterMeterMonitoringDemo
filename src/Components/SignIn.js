@@ -41,41 +41,43 @@ export class SignIn extends Component {
   onSubmit = event => {
     event.preventDefault();
 
-    const id = this.state.email;
-    const u = this.state.password;
+    const email = this.state.email;
+    const password = this.state.password;
 
-    console.log(id, u);
-
-    axios
-      .post(
-        `https://ec2-52-66-213-31.ap-south-1.compute.amazonaws.com:7452/cmVzdGZ1bCBhcGk/cmlybyBsb3JhIHByb3h5IHNlcnZlciA/signin`,
-        {
-          id,
-          u
-        },
-        {
-          Headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "X-Requested-With, Content-Type",
-            "Content-Type": "Appliction/json"
+    if (email === "admin" && password === "admin") {
+      axios
+        .post(
+          `https://ec2-52-66-213-31.ap-south-1.compute.amazonaws.com:7452/cmVzdGZ1bCBhcGk/cmlybyBsb3JhIHByb3h5IHNlcnZlciA/signin`,
+          {
+            id: "5d5ec20aedc3268530f1659c",
+            u: "$2b$07$FSxd3aDsh1eBTvQxJhfTLOJL3tqdCSSEJLM4KVTXb3sz/K8sVXUXq"
+          },
+          {
+            Headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Headers": "X-Requested-With, Content-Type",
+              "Content-Type": "Appliction/json"
+            }
           }
-        }
-      )
-      .then(res => {
-        if (res.status === 200) {
-          sessionStorage.setItem("token", res.data.token);
-          console.log("token", sessionStorage.getItem("token"));
-          console.log(res.data);
-          console.log(this.state.redirect);
-          if (this.onisLoggedIn) {
-            history.push("/Dashboard");
-            return <Route exact path="/Dashboard" component={Dashboard} />;
+        )
+        .then(res => {
+          if (res.status === 200) {
+            sessionStorage.setItem("token", res.data.token);
+            console.log("token", sessionStorage.getItem("token"));
+            console.log(res.data);
+            console.log(this.state.redirect);
+            if (this.onisLoggedIn) {
+              history.push("/Dashboard");
+              return <Route exact path="/Dashboard" component={Dashboard} />;
+            }
+          } else {
+            const error = new Error(res.error);
+            throw error;
           }
-        } else {
-          const error = new Error(res.error);
-          throw error;
-        }
-      });
+        });
+    } else {
+      console.log("Invalid credentials");
+    }
   };
 
   render() {
