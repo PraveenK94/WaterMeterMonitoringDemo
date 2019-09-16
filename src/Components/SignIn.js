@@ -35,7 +35,7 @@ export class SignIn extends Component {
   };
 
   onisLoggedIn = async () => {
-    this.setState({ redirect: true });
+    await this.setState({ redirect: true });
   };
 
   onSubmit = async event => {
@@ -64,6 +64,8 @@ export class SignIn extends Component {
           if (res.status === 200) {
             sessionStorage.setItem("token", res.data.token);
             console.log("token", sessionStorage.getItem("token"));
+            console.log(res.data);
+            console.log(this.state.redirect);
             if (this.onisLoggedIn) {
               history.push("/Dashboard");
               return <Route exact path="/Dashboard" component={Dashboard} />;

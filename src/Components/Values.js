@@ -40,6 +40,7 @@ export class Values extends Component {
         <Typography color="textSecondary" className={useStyles.unitContext}>
           Details
         </Typography>
+        <p>{this.getDateandTime}</p>
       </React.Fragment>
     );
   }
