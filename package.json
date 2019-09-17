@@ -24,7 +24,8 @@
     "pino-colada": "^1.4.5"
   },
   "scripts": {
-    "start": "run-p server webapp",
+    "start": "set HTTPS=true && react-scripts start",
+    "startbackup": "run-p server webapp",
     "webapp": "set HTTPS=true && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
