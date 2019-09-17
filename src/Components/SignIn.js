@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import history from "../history";
-import { withRouter, Route } from "react-router-dom";
+//import history from "../history";
+import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -11,8 +11,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Dashboard from "./Dashboard";
-import axios from "axios";
+//import Dashboard from "./Dashboard";
+//import axios from "axios";
 
 export class SignIn extends Component {
   constructor() {
@@ -45,7 +45,13 @@ export class SignIn extends Component {
     const password = this.state.password;
 
     if (email === "admin" && password === "admin") {
-      await axios
+      fetch("/api/signin")
+        .then(response => response.json())
+        .then(data => {
+          console.log("***", data);
+        });
+
+      /* await axios
         .post(
           `https://ec2-52-66-213-31.ap-south-1.compute.amazonaws.com:7452/cmVzdGZ1bCBhcGk/cmlybyBsb3JhIHByb3h5IHNlcnZlciA/signin`,
           {
@@ -75,6 +81,7 @@ export class SignIn extends Component {
             throw error;
           }
         });
+        */
     } else {
       console.log("Invalid credentials");
     }

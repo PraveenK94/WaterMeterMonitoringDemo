@@ -2,11 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Router, Route, Switch } from "react-router-dom";
 import "./index.css";
-import App from "./App";
+
 import * as serviceWorker from "./serviceWorker";
 import history from "./history";
 import SignIn from "./Components/SignIn";
 import Dashboard from "./Components/Dashboard";
+
+console.log("hello index.js");
 
 ReactDOM.render(
   <Router history={history}>
