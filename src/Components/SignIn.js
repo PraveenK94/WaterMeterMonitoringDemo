@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-//import history from "../history";
-import { withRouter } from "react-router-dom";
+import history from "../history";
+import { withRouter, Route } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -11,7 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-//import Dashboard from "./Dashboard";
+import Dashboard from "./Dashboard";
 //import axios from "axios";
 
 export class SignIn extends Component {
@@ -34,8 +34,8 @@ export class SignIn extends Component {
     });
   };
 
-  onisLoggedIn = async () => {
-    await this.setState({ redirect: true });
+  onisLoggedIn = () => {
+    this.setState({ redirect: true });
   };
 
   onSubmit = async event => {
@@ -45,11 +45,21 @@ export class SignIn extends Component {
     const password = this.state.password;
 
     if (email === "admin" && password === "admin") {
-      fetch("/api/signin")
-        .then(response => response.json())
-        .then(data => {
-          console.log("***", data);
-        });
+      fetch("/api/signin").then(res => {
+        if (res.status === 200) {
+          this.onisLoggedIn();
+          console.log("logged in status ", this.state.redirect);
+          if (this.state.redirect) {
+            console.log("welcome to dashboard");
+            history.push("/Dashboard");
+            console.log("welcome to dashboard");
+            return <Route exact path="/Dashboard" component={Dashboard} />;
+          }
+        } else {
+          const error = new Error(res.error);
+          throw error;
+        }
+      });
 
       /* await axios
         .post(

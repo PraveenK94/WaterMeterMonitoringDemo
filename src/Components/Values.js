@@ -6,10 +6,7 @@ import Title from "./Title";
 export class Values extends Component {
   constructor() {
     super();
-    this.state = {
-      date: "",
-      time: ""
-    };
+    this.state = {};
   }
 
   getDateandTime = () => {
@@ -33,10 +30,8 @@ export class Values extends Component {
 
     return (
       <React.Fragment>
-        <Title>Unit consumed</Title>
-        <Typography component="p" variant="h6">
-          432.48Kl
-        </Typography>
+        <Title>No of Devices</Title>
+        <Typography component="p" variant="h6"></Typography>
         <Typography color="textSecondary" className={useStyles.unitContext}>
           Details
         </Typography>

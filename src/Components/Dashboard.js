@@ -10,7 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import Chart from "./Chart";
 import Orders from "./payment";
 import Values from "./Values";
-import axios from "axios";
+//import axios from "axios";
 import Header from "./Header";
 import Sidenav from "./sideNav";
 import Typography from "@material-ui/core/Typography";
@@ -27,37 +27,45 @@ class Dashboard extends React.Component {
       decodedData: {
         deviceName: "",
         levelPct: ""
-      }
+      },
+      totalcount: ""
     };
   }
 
-  async componentDidMount() {
-    let token = sessionStorage.getItem("token");
+  getTotalCount = () => {
+    this.setState({ totalcount: this.getTotalCount });
+  };
 
-    if (token === null) {
-      this.setState({ redirect: true });
-      return;
-    }
-    await axios
-      .get(
-        `https://ec2-52-66-213-31.ap-south-1.compute.amazonaws.com:7452/cmVzdGZ1bCBhcGk/cmlybyBsb3JhIHByb3h5IHNlcnZlciA/5d5ec20aedc3268530f1659c/2/737374706c000ff5/getDeviceData`,
-        {
-          headers: {
-            Accept: "*/*",
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "Application/json"
-          }
-        }
-      )
-      .then(res => {
-        const device_data = res.data;
-        console.log(device_data);
+  async componentDidMount() {
+    fetch("/api/devicelist")
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
         this.setState({
-          deviceName: res.data.decodedData.deviceName,
-          levelPct: res.data.decodedData.levelPct,
-          datetime: res.data.datetime
+          totalcount: JSON.parse(data).totalCount
         });
+        console.log(JSON.parse(data).totalCount);
       });
+    // await axios
+    //   .get(
+    //     `https://ec2-52-66-213-31.ap-south-1.compute.amazonaws.com:7452/cmVzdGZ1bCBhcGk/cmlybyBsb3JhIHByb3h5IHNlcnZlciA/5d5ec20aedc3268530f1659c/2/737374706c000ff5/getDeviceData`,
+    //     {
+    //       headers: {
+    //         Accept: "*/*",
+    //         Authorization: `Bearer ${token}`,
+    //         "Content-Type": "Application/json"
+    //       }
+    //     }
+    //   )
+    //   .then(res => {
+    //     const device_data = res.data;
+    //     console.log(device_data);
+    //     this.setState({
+    //       deviceName: res.data.decodedData.deviceName,
+    //       levelPct: res.data.decodedData.levelPct,
+    //       datetime: res.data.datetime
+    //     });
+    //   });
   }
 
   render() {
@@ -110,7 +118,7 @@ class Dashboard extends React.Component {
       }
     });
 
-    const { redirect, deviceName, levelPct, datetime } = this.state;
+    const { redirect, deviceName, levelPct, datetime, totalcount } = this.state;
 
     if (redirect) {
       return <Redirect to="/" />;
@@ -146,6 +154,8 @@ class Dashboard extends React.Component {
                 <Grid item xs={12} md={4} lg={3}>
                   <Paper className={clsx(theme.paper, theme.fixedHeight)}>
                     <Values />
+                    <p>{totalcount}</p>
+
                     <div>
                       <Typography>Water Level Point:{levelPct}</Typography>
                     </div>
