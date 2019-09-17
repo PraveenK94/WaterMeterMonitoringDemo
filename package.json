@@ -9,19 +9,20 @@
     "body-parser": "^1.19.0",
     "chart.js": "^2.8.0",
     "express": "^4.17.1",
+    "express-pino-logger": "^4.0.0",
+    "http-proxy-middleware": "^0.20.0",
     "morgan": "^1.9.1",
+    "node-env-run": "^3.0.2",
+    "nodemon": "^1.19.2",
+    "npm-run-all": "^4.1.5",
+    "pino-colada": "^1.4.5",
     "react": "^16.9.0",
     "react-chartjs-2": "^2.7.6",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
     "recharts": "^1.7.1",
-    "serve": "^11.1.0",
-    "express-pino-logger": "^4.0.0",
-    "node-env-run": "^3.0.2",
-    "nodemon": "^1.19.2",
-    "npm-run-all": "^4.1.5",
-    "pino-colada": "^1.4.5"
+    "serve": "^11.1.0"
   },
   "scripts": {
     "start": "set HTTPS=true && react-scripts start",
@@ -50,7 +51,5 @@
       "last 1 safari version"
     ]
   },
-  "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
-  "devDependencies": {},
-  "proxy": "http://localhost:8000"
+  "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
 }
