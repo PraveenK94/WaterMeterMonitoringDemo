@@ -65,6 +65,3 @@
   overflow: auto;
   flex-direction: column;
 }
-.fixedHeight {
-  height: 240;
-}

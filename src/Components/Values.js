@@ -6,7 +6,9 @@ import Title from "./Title";
 export class Values extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+
+    };
   }
 
   getDateandTime = () => {
@@ -30,11 +32,7 @@ export class Values extends Component {
 
     return (
       <React.Fragment>
-        <Title>No of Devices</Title>
-        <Typography component="p" variant="h6"></Typography>
-        <Typography color="textSecondary" className={useStyles.unitContext}>
-          Details
-        </Typography>
+       
       </React.Fragment>
     );
   }

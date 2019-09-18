@@ -143,8 +143,8 @@ export class SignIn extends Component {
               required
               fullWidth
               id="email"
-              label="Email Address"
-              name="email"
+              label="User Name"
+              name="username"
               autoComplete="email"
               error={errors.email}
               onChange={this.onChange}
@@ -178,14 +178,6 @@ export class SignIn extends Component {
                 Sign In
               </Button>
             </Link>
-
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-            </Grid>
           </form>
         </div>
       </Container>

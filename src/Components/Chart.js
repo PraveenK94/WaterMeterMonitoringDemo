@@ -2,7 +2,16 @@ import React, { Component } from "react";
 import { Line } from "react-chartjs-2";
 
 const data = {
-  labels: ["", "", "", "", "", "", ""],
+  labels: [
+    "Jan 2019",
+    "Feb 2019",
+    "Mar 2019",
+    "Apr 2019",
+    "May 2019",
+    "Jun 2019",
+    "Jul 2019"
+  ],
+
   datasets: [
     {
       label: "Consumption trends",
@@ -23,16 +32,37 @@ const data = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: [83, 93, 88, 98, 90, 85, 93]
+      data: [320, 352, 401, 449, 516, 577, 634]
     }
   ]
+};
+
+const options = {
+  scales: {
+    yAxes: [
+      {
+        scaleLabel: {
+          display: true,
+          labelString: "Water Meter Reading"
+        }
+      }
+    ],
+    xAxes: [
+      {
+        scaleLabel: {
+          display: true,
+          labelString: "Time"
+        }
+      }
+    ]
+  }
 };
 
 export class Chart extends Component {
   render() {
     return (
       <div>
-        <Line data={data} />
+        <Line data={data} options={options} />
       </div>
     );
   }

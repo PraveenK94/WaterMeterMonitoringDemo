@@ -10,11 +10,11 @@ import Paper from "@material-ui/core/Paper";
 import Chart from "./Chart";
 import Orders from "./payment";
 import Values from "./Values";
-//import axios from "axios";
 import Header from "./Header";
 import Sidenav from "./sideNav";
 import Typography from "@material-ui/core/Typography";
 import "./Dashboard.css";
+//import update from "react-addons-update";
 
 const drawerWidth = 240;
 
@@ -23,20 +23,50 @@ class Dashboard extends React.Component {
     super();
     this.state = {
       redirect: false,
-      datetime: "",
-      decodedData: {
-        deviceName: "",
-        levelPct: ""
-      },
-      totalcount: ""
+      totalcount: "",
+      getDeviceData: "abc",
+      devEUI: "1234",
+      datetime: "500233",
+      meterReading: "18273912",
+
+      devicesList: [
+        {
+          devEUI: "3930323567378703",
+          meterReading: "",
+          datetime: "",
+          deviceName: ""
+        },
+        {
+          devEUI: "70b3d5499433287e",
+          meterReading: "",
+          datetime: "",
+          deviceName: ""
+        },
+        {
+          devEUI: "70b3d549902e26e1",
+          meterReading: "",
+          datetime: "",
+          deviceName: ""
+        }
+      ]
     };
   }
 
   getTotalCount = () => {
-    this.setState({ totalcount: this.getTotalCount });
+    this.setState({ totalcount: this.getTotalCount, devEUI: this.devEUI });
   };
 
-  async componentDidMount() {
+  getDeviceData = () => {
+    this.setstate({
+      deviceName: this.getDeviceData,
+      meterReading: this.getDeviceData,
+      datetime: this.getDeviceData
+    });
+  };
+
+  componentDidMount() {
+    let { devicesList } = this.state;
+    let newDevList = [...devicesList];
     fetch("/api/devicelist")
       .then(response => response.json())
       .then(data => {
@@ -46,26 +76,32 @@ class Dashboard extends React.Component {
         });
         console.log(JSON.parse(data).totalCount);
       });
-    // await axios
-    //   .get(
-    //     `https://ec2-52-66-213-31.ap-south-1.compute.amazonaws.com:7452/cmVzdGZ1bCBhcGk/cmlybyBsb3JhIHByb3h5IHNlcnZlciA/5d5ec20aedc3268530f1659c/2/737374706c000ff5/getDeviceData`,
-    //     {
-    //       headers: {
-    //         Accept: "*/*",
-    //         Authorization: `Bearer ${token}`,
-    //         "Content-Type": "Application/json"
-    //       }
-    //     }
-    //   )
-    //   .then(res => {
-    //     const device_data = res.data;
-    //     console.log(device_data);
-    //     this.setState({
-    //       deviceName: res.data.decodedData.deviceName,
-    //       levelPct: res.data.decodedData.levelPct,
-    //       datetime: res.data.datetime
-    //     });
-    //   });
+
+    console.log("device list fetch", newDevList);
+    for (let index in newDevList) {
+      console.log("index::::", newDevList[index]);
+      fetch(`/api/devicedata?devEUI=${newDevList[index].devEUI}`)
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          console.log(JSON.parse(data).decodedData.deviceName);
+          console.log(JSON.parse(data).decodedData.meterReading);
+          console.log(JSON.parse(data).datetime);
+          console.log(JSON.parse(data).devEUI);
+          console.log("before>>>>>> device data", newDevList[index]);
+          newDevList[index].datetime = JSON.parse(data).datetime;
+          newDevList[index].meterReading = JSON.parse(
+            data
+          ).decodedData.meterReading;
+          newDevList[index].deviceName = JSON.parse(
+            data
+          ).decodedData.deviceName;
+          this.setState({ devicesList: newDevList });
+          console.log("newDevList data>>>", newDevList[index]);
+          console.log("device List", devicesList);
+        });
+    }
+    console.log("device List", devicesList);
   }
 
   render() {
@@ -118,7 +154,16 @@ class Dashboard extends React.Component {
       }
     });
 
-    const { redirect, deviceName, levelPct, datetime, totalcount } = this.state;
+    const {
+      devicesList,
+      redirect,
+      deviceName,
+      meterReading,
+      datetime,
+      totalcount,
+      devEUI,
+      getDeviceData
+    } = this.state;
 
     if (redirect) {
       return <Redirect to="/" />;
@@ -146,28 +191,80 @@ class Dashboard extends React.Component {
               }}
             >
               <Grid container spacing={3}>
+                <Grid item xs={12} md={4} lg={4}>
+                  <Paper className={clsx(theme.paper, theme.fixedHeight)}>
+                    <Values />
+
+                    <Typography variant="h6" color="primary">
+                      {" "}
+                      Device ID : {devicesList[0].devEUI}
+                    </Typography>
+
+                    <Typography>
+                      Device Type : {devicesList[0].deviceName}
+                    </Typography>
+
+                    <Typography>
+                      Lasted Reading : {devicesList[0].meterReading}
+                    </Typography>
+
+                    <Typography>
+                      Updated Time : {devicesList[0].datetime}
+                    </Typography>
+                  </Paper>
+                </Grid>
+
+                <Grid item xs={12} md={4} lg={4}>
+                  <Paper className={clsx(theme.paper, theme.fixedHeight)}>
+                    <Values />
+
+                    <Typography variant="h6" color="primary">
+                      Device ID : {devicesList[1].devEUI}
+                    </Typography>
+
+                    <Typography>
+                      Device Type : {devicesList[1].deviceName}
+                    </Typography>
+
+                    <Typography>
+                      Lasted Reading : {devicesList[1].meterReading}
+                    </Typography>
+
+                    <Typography>
+                      Updated Time : {devicesList[1].datetime}
+                    </Typography>
+                  </Paper>
+                </Grid>
+
+                <Grid item xs={12} md={8} lg={4}>
+                  <Paper className={clsx(theme.paper, theme.fixedHeight)}>
+                    <Values />
+
+                    <Typography variant="h6" color="primary">
+                      Device ID : {devicesList[2].devEUI}
+                    </Typography>
+
+                    <Typography>
+                      Device Type : {devicesList[2].deviceName}
+                    </Typography>
+
+                    <Typography>
+                      Lasted Reading : {devicesList[2].meterReading}
+                    </Typography>
+
+                    <Typography>
+                      Updated Time : {devicesList[2].datetime}
+                    </Typography>
+                  </Paper>
+                </Grid>
+
                 <Grid item xs={12} md={8} lg={9}>
                   <Paper>
                     <Chart />
                   </Paper>
                 </Grid>
-                <Grid item xs={12} md={4} lg={3}>
-                  <Paper className={clsx(theme.paper, theme.fixedHeight)}>
-                    <Values />
-                    <p>{totalcount}</p>
 
-                    <div>
-                      <Typography>Water Level Point:{levelPct}</Typography>
-                    </div>
-                    <div>
-                      <Typography>DeviceName:{deviceName}</Typography>
-                    </div>
-                    <div>
-                      <Typography>{datetime}</Typography>
-                    </div>
-                  </Paper>
-                </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} md={8} lg={9}>
                   <Paper className="paper">
                     <Orders />
                   </Paper>

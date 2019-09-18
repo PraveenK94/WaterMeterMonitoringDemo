@@ -1,8 +1,17 @@
 var express = require("express");
 const https = require("https");
+const pino = require("express-pino-logger")();
+
+let app = express();
+let port = 8000;
+
+app.use(pino);
+
 var remoteProxyServerToken = "";
 var remoteProxyServerDevicelist = "";
+var remoteProxyServerDeviceData = "";
 
+//function to GET Token
 function remoteProxyServerGetToken() {
   const data = JSON.stringify({
     id: "5d5ec20aedc3268530f1659c",
@@ -38,12 +47,7 @@ function remoteProxyServerGetToken() {
   req.end();
 }
 
-function getUpdatedToken() {
-  const t = JSON.parse(remoteProxyServerToken).token;
-  console.log(t);
-  return t;
-}
-
+// function to GET Device List
 function remoteProxyServerGetDevicelist(callback) {
   var err = false;
   const options = {
@@ -67,10 +71,10 @@ function remoteProxyServerGetDevicelist(callback) {
       res.statusMessage
     );
     res.on("data", d => {
-      remoteProxyServerDevicelist = d.toString();
-      console.log(remoteProxyServerDevicelist);
+      remoteProxyServerDeviceData = d.toString();
+      console.log(remoteProxyServerDeviceData);
       console.log("\n");
-      callback(err, remoteProxyServerDevicelist);
+      callback(err, remoteProxyServerDeviceData);
     });
   });
 
@@ -84,13 +88,18 @@ function remoteProxyServerGetDevicelist(callback) {
   req.end();
 }
 
-function remoteProxyServerGetDeviceData(callback) {
+setTimeout(remoteProxyServerGetToken, 100);
+setInterval(remoteProxyServerGetToken, 27900000);
+
+// function to call GET DeviceData
+function remoteProxyServerGetDeviceData(deviceId, callback) {
   var err = false;
+  const deviceEui = deviceId.devEUI;
+  console.log("device EUI::::::", deviceEui);
   const options = {
     hostname: "ec2-52-66-213-31.ap-south-1.compute.amazonaws.com",
     port: 7452,
-    path:
-      "/cmVzdGZ1bCBhcGk/cmlybyBsb3JhIHByb3h5IHNlcnZlciA/5d5ec20aedc3268530f1659c/2/deviceList?limit=100&offset=0",
+    path: `/cmVzdGZ1bCBhcGk/cmlybyBsb3JhIHByb3h5IHNlcnZlciA/5d5ec20aedc3268530f1659c/2/${deviceEui}/getDeviceData`,
     method: "GET",
     rejectUnauthorized: false,
     headers: {
@@ -98,6 +107,7 @@ function remoteProxyServerGetDeviceData(callback) {
       Authorization: `Bearer ${remoteProxyServerToken}`
     }
   };
+
   console.log("be: devicelist req");
   const req = https.request(options, res => {
     console.log(
@@ -124,14 +134,6 @@ function remoteProxyServerGetDeviceData(callback) {
   req.end();
 }
 
-const pino = require("express-pino-logger")();
-
-let app = express();
-let port = 8000;
-app.use(pino);
-setTimeout(remoteProxyServerGetToken, 10000);
-setInterval(remoteProxyServerGetToken, 27900000);
-
 app.get("/api/devicelist", (req, res) => {
   console.log("be: devicelist");
   remoteProxyServerGetDevicelist(function(errorCode, deviceList) {
@@ -145,14 +147,14 @@ app.get("/api/devicelist", (req, res) => {
 });
 
 app.get("/api/devicedata", (req, res) => {
-  console.log("be: device");
-  remoteProxyServerGetDeviceData(function(errorCode, deviceList) {
-    console.log("be: devicelist callback");
+  console.log("be: devicedata query", req.query);
+  remoteProxyServerGetDeviceData(req.query, function(errorCode, deviceData) {
+    console.log("be: devicedata callback");
     if (errorCode) {
       return res.sendStatus(403);
     }
     res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(deviceList));
+    res.send(JSON.stringify(deviceData));
   });
 });
 
