@@ -13,6 +13,7 @@ export default class Header extends React.Component {
           <IconButton></IconButton>
           <IconButton></IconButton>
           <IconButton></IconButton>
+          <IconButton></IconButton>
 
           <Typography color="inherit" variant="h4" align="right">
             Water Meter Monitoring
