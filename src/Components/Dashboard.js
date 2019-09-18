@@ -8,13 +8,12 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Chart from "./Chart";
-import Orders from "./payment";
+import Orders from "./consumptionRate";
 import Values from "./Values";
 import Header from "./Header";
 import Sidenav from "./sideNav";
 import Typography from "@material-ui/core/Typography";
 import "./Dashboard.css";
-//import update from "react-addons-update";
 
 const drawerWidth = 240;
 
@@ -154,16 +153,7 @@ class Dashboard extends React.Component {
       }
     });
 
-    const {
-      devicesList,
-      redirect,
-      deviceName,
-      meterReading,
-      datetime,
-      totalcount,
-      devEUI,
-      getDeviceData
-    } = this.state;
+    const { devicesList, redirect } = this.state;
 
     if (redirect) {
       return <Redirect to="/" />;
@@ -196,20 +186,21 @@ class Dashboard extends React.Component {
                     <Values />
 
                     <Typography variant="h6" color="primary">
+                      Customer A
+                    </Typography>
+
+                    <Typography variant="h6">
+                      Current Reading : {devicesList[0].meterReading}
+                    </Typography>
+
+                    <Typography variant="caption">
+                      Timestamp : {devicesList[0].datetime}
+                      <br />
+                    </Typography>
+
+                    <Typography variant="caption">
                       {" "}
                       Device ID : {devicesList[0].devEUI}
-                    </Typography>
-
-                    <Typography>
-                      Device Type : {devicesList[0].deviceName}
-                    </Typography>
-
-                    <Typography>
-                      Lasted Reading : {devicesList[0].meterReading}
-                    </Typography>
-
-                    <Typography>
-                      Updated Time : {devicesList[0].datetime}
                     </Typography>
                   </Paper>
                 </Grid>
@@ -219,41 +210,45 @@ class Dashboard extends React.Component {
                     <Values />
 
                     <Typography variant="h6" color="primary">
+                      Customer B
+                    </Typography>
+
+                    <Typography variant="h6">
+                      Current Reading : {devicesList[1].meterReading}
+                    </Typography>
+
+                    <Typography variant="caption">
+                      Timestamp : {devicesList[1].datetime}
+                      <br />
+                    </Typography>
+
+                    <Typography variant="caption">
+                      {" "}
                       Device ID : {devicesList[1].devEUI}
-                    </Typography>
-
-                    <Typography>
-                      Device Type : {devicesList[1].deviceName}
-                    </Typography>
-
-                    <Typography>
-                      Lasted Reading : {devicesList[1].meterReading}
-                    </Typography>
-
-                    <Typography>
-                      Updated Time : {devicesList[1].datetime}
                     </Typography>
                   </Paper>
                 </Grid>
 
-                <Grid item xs={12} md={8} lg={4}>
+                <Grid item xs={12} md={4} lg={4}>
                   <Paper className={clsx(theme.paper, theme.fixedHeight)}>
                     <Values />
 
                     <Typography variant="h6" color="primary">
+                      Customer C
+                    </Typography>
+
+                    <Typography variant="h6">
+                      Current Reading : {devicesList[2].meterReading}
+                    </Typography>
+
+                    <Typography variant="caption">
+                      Timestamp : {devicesList[2].datetime}
+                      <br />
+                    </Typography>
+
+                    <Typography variant="caption">
+                      {" "}
                       Device ID : {devicesList[2].devEUI}
-                    </Typography>
-
-                    <Typography>
-                      Device Type : {devicesList[2].deviceName}
-                    </Typography>
-
-                    <Typography>
-                      Lasted Reading : {devicesList[2].meterReading}
-                    </Typography>
-
-                    <Typography>
-                      Updated Time : {devicesList[2].datetime}
                     </Typography>
                   </Paper>
                 </Grid>

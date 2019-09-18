@@ -15,7 +15,7 @@ export default class Header extends React.Component {
           <IconButton></IconButton>
           <IconButton></IconButton>
 
-          <Typography color="inherit" variant="h4" align="right">
+          <Typography color="inherit" variant="h5" align="right">
             Water Meter Monitoring
           </Typography>
         </Toolbar>

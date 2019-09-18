@@ -1,14 +1,10 @@
 import React, { Component } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Title from "./Title";
 
 export class Values extends Component {
   constructor() {
     super();
-    this.state = {
-
-    };
+    this.state = {};
   }
 
   getDateandTime = () => {
@@ -30,11 +26,7 @@ export class Values extends Component {
       }
     });
 
-    return (
-      <React.Fragment>
-       
-      </React.Fragment>
-    );
+    return <React.Fragment></React.Fragment>;
   }
 }
 
