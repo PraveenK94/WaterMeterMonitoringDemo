@@ -9,7 +9,6 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Chart from "./Chart";
 import Orders from "./consumptionRate";
-import Values from "./Values";
 import Header from "./Header";
 import Sidenav from "./sideNav";
 import Typography from "@material-ui/core/Typography";
@@ -162,8 +161,8 @@ class Dashboard extends React.Component {
       <ThemeProvider theme={theme}>
         <div className="bashboardCnt">
           <CssBaseline />
-          <Header />
           <Sidenav />
+          <Header />
 
           <main
             style={{
@@ -181,10 +180,8 @@ class Dashboard extends React.Component {
               }}
             >
               <Grid container spacing={3}>
-                <Grid item xs={12} md={4} lg={4}>
+                <Grid item xs={12} md={4} lg={3}>
                   <Paper className={clsx(theme.paper, theme.fixedHeight)}>
-                    <Values />
-
                     <Typography variant="h6" color="primary">
                       Customer A
                     </Typography>
@@ -205,10 +202,8 @@ class Dashboard extends React.Component {
                   </Paper>
                 </Grid>
 
-                <Grid item xs={12} md={4} lg={4}>
+                <Grid item xs={12} md={4} lg={3}>
                   <Paper className={clsx(theme.paper, theme.fixedHeight)}>
-                    <Values />
-
                     <Typography variant="h6" color="primary">
                       Customer B
                     </Typography>
@@ -229,10 +224,8 @@ class Dashboard extends React.Component {
                   </Paper>
                 </Grid>
 
-                <Grid item xs={12} md={4} lg={4}>
+                <Grid item xs={12} md={4} lg={3}>
                   <Paper className={clsx(theme.paper, theme.fixedHeight)}>
-                    <Values />
-
                     <Typography variant="h6" color="primary">
                       Customer C
                     </Typography>
