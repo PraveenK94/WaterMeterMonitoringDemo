@@ -145,7 +145,7 @@ export class SignIn extends Component {
               required
               fullWidth
               id="email"
-              label="User Name"
+              label="Username"
               name="username"
               autoComplete="email"
               error={errors.email}
