@@ -51,17 +51,17 @@ class Dashboard extends React.Component {
     };
   }
 
-  getTotalCount = () => {
-    this.setState({ totalcount: this.getTotalCount, devEUI: this.devEUI });
-  };
+  // getTotalCount = () => {
+  //   this.setState({ totalcount: this.getTotalCount, devEUI: this.devEUI });
+  // };
 
-  getDeviceData = () => {
-    this.setstate({
-      deviceName: this.getDeviceData,
-      meterReading: this.getDeviceData,
-      datetime: this.getDeviceData
-    });
-  };
+  // getDeviceData = () => {
+  //   this.setstate({
+  //     deviceName: this.getDeviceData,
+  //     meterReading: this.getDeviceData,
+  //     datetime: this.getDeviceData
+  //   });
+  // };
 
   componentDidMount() {
     let { devicesList } = this.state;
