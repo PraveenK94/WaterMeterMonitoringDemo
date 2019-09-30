@@ -43,9 +43,10 @@ export default class Header extends React.Component {
 
     return (
       // <AppBar color="default" elevation={0} className={useStyles.appBar}>
-      <Toolbar style={{ backgroundColor: "#3F51B5" }}>
+
+      <Toolbar style={{ backgroundColor: "#3F51B5" }} width="100px">
         <Container>
-          <Typography color="textPrimary" variant="h5">
+          <Typography color="colorTextPrimary" variant="h5">
             Water Meter Monitoring
             <br />
             <Typography variant="caption">{Date()}</Typography>
