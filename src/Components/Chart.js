@@ -249,13 +249,6 @@ export class Chart extends Component {
             options={this.state.chartOptions}
           />
         </div>
-
-        <div>
-          <Line
-            data={this.state.chartData.data}
-            options={this.state.chartOptions}
-          />
-        </div>
       </Container>
     );
   }
