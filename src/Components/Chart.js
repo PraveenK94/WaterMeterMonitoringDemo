@@ -241,6 +241,7 @@ export class Chart extends Component {
   }
 
   render() {
+    console.log(this.state.chartData.data);
     return (
       <Container>
         <div>
