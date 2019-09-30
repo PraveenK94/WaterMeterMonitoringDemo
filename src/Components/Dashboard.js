@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import clsx from "clsx";
 import { createMuiTheme } from "@material-ui/core/styles";
-import { ThemeProvider } from "@material-ui/styles";
+//import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -22,23 +22,22 @@ class Dashboard extends React.Component {
     this.state = {
       redirect: false,
       totalcount: "",
-      getDeviceData: "abc",
-      devEUI: "1234",
-      datetime: "500233",
-      meterReading: "18273912",
-
       devicesList: [
         {
           devEUI: "3930323567378703",
-          meterReading: "",
           datetime: "",
-          deviceName: ""
+          decodedData: {
+            deviceName: "",
+            meterReading: ""
+          }
         },
         {
           devEUI: "70b3d5499433287e",
-          meterReading: "",
           datetime: "",
-          deviceName: ""
+          decodedData: {
+            deviceName: "",
+            meterReading: ""
+          }
         },
         {
           devEUI: "70b3d549902e26e1",
@@ -49,18 +48,6 @@ class Dashboard extends React.Component {
       ]
     };
   }
-
-  // getTotalCount = () => {
-  //   this.setState({ totalcount: this.getTotalCount, devEUI: this.devEUI });
-  // };
-
-  // getDeviceData = () => {
-  //   this.setstate({
-  //     deviceName: this.getDeviceData,
-  //     meterReading: this.getDeviceData,
-  //     datetime: this.getDeviceData
-  //   });
-  // };
 
   componentDidMount() {
     let { devicesList } = this.state;
@@ -118,7 +105,8 @@ class Dashboard extends React.Component {
       },
       appBarShift: {
         marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`
+        width: `calc(100% - ${drawerWidth}px)`,
+        right: "17px  "
       },
       menuButton: {
         marginRight: 36
@@ -158,110 +146,113 @@ class Dashboard extends React.Component {
       return <Redirect to="/" />;
     }
     return (
-      <ThemeProvider theme={theme}>
-        <div className="bashboardCnt">
-          <CssBaseline />
-          <Sidenav />
+      //   <ThemeProvider theme={theme}>
+      <div className="bashboardCnt">
+        <CssBaseline />
+        <main
+          style={{
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto"
+          }}
+        >
+          <div />
+          <meta
+            name="viewport"
+            content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
+          />
           <Header />
 
-          <main
+          <Container
+            maxWidth="lg"
             style={{
-              flexGrow: 1,
-              height: "100vh",
-              overflow: "auto"
+              marginTop: "55px",
+              marginLeft: "175px"
             }}
           >
-            <div />
-            <Container
-              maxWidth="lg"
-              style={{
-                marginTop: "85px",
-                marginLeft: "193px"
-              }}
-            >
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={4} lg={3}>
-                  <Paper className={clsx(theme.paper, theme.fixedHeight)}>
-                    <Typography variant="h6" color="primary">
-                      Customer A
-                    </Typography>
+            {/* <Sidenav /> */}
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper className={clsx(theme.paper, theme.fixedHeight)}>
+                  <Typography variant="h6" color="primary">
+                    Customer A
+                  </Typography>
 
-                    <Typography variant="h6">
-                      Current Reading : {devicesList[0].meterReading}
-                    </Typography>
+                  <Typography variant="h6">
+                    Current Reading : {devicesList[0].meterReading}
+                  </Typography>
 
-                    <Typography variant="caption">
-                      Timestamp : {devicesList[0].datetime}
-                      <br />
-                    </Typography>
+                  <Typography variant="caption">
+                    Timestamp : {devicesList[0].datetime}
+                    <br />
+                  </Typography>
 
-                    <Typography variant="caption">
-                      {" "}
-                      Device ID : {devicesList[0].devEUI}
-                    </Typography>
-                  </Paper>
-                </Grid>
-
-                <Grid item xs={12} md={4} lg={3}>
-                  <Paper className={clsx(theme.paper, theme.fixedHeight)}>
-                    <Typography variant="h6" color="primary">
-                      Customer B
-                    </Typography>
-
-                    <Typography variant="h6">
-                      Current Reading : {devicesList[1].meterReading}
-                    </Typography>
-
-                    <Typography variant="caption">
-                      Timestamp : {devicesList[1].datetime}
-                      <br />
-                    </Typography>
-
-                    <Typography variant="caption">
-                      {" "}
-                      Device ID : {devicesList[1].devEUI}
-                    </Typography>
-                  </Paper>
-                </Grid>
-
-                <Grid item xs={12} md={4} lg={3}>
-                  <Paper className={clsx(theme.paper, theme.fixedHeight)}>
-                    <Typography variant="h6" color="primary">
-                      Customer C
-                    </Typography>
-
-                    <Typography variant="h6">
-                      Current Reading : {devicesList[2].meterReading}
-                    </Typography>
-
-                    <Typography variant="caption">
-                      Timestamp : {devicesList[2].datetime}
-                      <br />
-                    </Typography>
-
-                    <Typography variant="caption">
-                      {" "}
-                      Device ID : {devicesList[2].devEUI}
-                    </Typography>
-                  </Paper>
-                </Grid>
-
-                <Grid item xs={12} md={8} lg={9}>
-                  <Paper>
-                    <Chart />
-                  </Paper>
-                </Grid>
-
-                <Grid item xs={12} md={8} lg={9}>
-                  <Paper className="paper">
-                    <Orders />
-                  </Paper>
-                </Grid>
+                  <Typography variant="caption">
+                    Device ID : {devicesList[0].devEUI}
+                  </Typography>
+                </Paper>
               </Grid>
-            </Container>
-          </main>
-        </div>
-      </ThemeProvider>
+
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper className={clsx(theme.paper, theme.fixedHeight)}>
+                  <Typography variant="h6" color="primary">
+                    Customer B
+                  </Typography>
+
+                  <Typography variant="h6">
+                    Current Reading : {devicesList[1].meterReading}
+                  </Typography>
+
+                  <Typography variant="caption">
+                    Timestamp : {devicesList[1].datetime}
+                    <br />
+                  </Typography>
+
+                  <Typography variant="caption">
+                    {" "}
+                    Device ID : {devicesList[1].devEUI}
+                  </Typography>
+                </Paper>
+              </Grid>
+
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper className={clsx(theme.paper, theme.fixedHeight)}>
+                  <Typography variant="h6" color="primary">
+                    Customer C
+                  </Typography>
+
+                  <Typography variant="h6">
+                    Current Reading : {devicesList[2].meterReading}
+                  </Typography>
+
+                  <Typography variant="caption">
+                    Timestamp : {devicesList[2].datetime}
+                    <br />
+                  </Typography>
+
+                  <Typography variant="caption">
+                    {" "}
+                    Device ID : {devicesList[2].devEUI}
+                  </Typography>
+                </Paper>
+              </Grid>
+
+              <Grid item xs={12} md={8} lg={9}>
+                <Paper>
+                  <Chart />
+                </Paper>
+              </Grid>
+
+              <Grid item xs={12} md={8} lg={9}>
+                <Paper className="paper">
+                  <Orders />
+                </Paper>
+              </Grid>
+            </Grid>
+          </Container>
+        </main>
+      </div>
+      //  </ThemeProvider>
     );
   }
 }

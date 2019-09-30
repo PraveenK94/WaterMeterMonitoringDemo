@@ -70,7 +70,7 @@ export default class Sidnav extends React.Component {
         }}
         open={this.state.open}
       >
-        <div>
+        <div position="static">
           <IconButton>
             <ChevronLeftIcon />
           </IconButton>
