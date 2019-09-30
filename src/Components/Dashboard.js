@@ -13,6 +13,7 @@ import Header from "./Header";
 import Sidenav from "./sideNav";
 import Typography from "@material-ui/core/Typography";
 import "./Dashboard.css";
+import { Button } from "@material-ui/core";
 
 const drawerWidth = 240;
 
@@ -55,11 +56,11 @@ class Dashboard extends React.Component {
     fetch("/api/devicelist")
       .then(response => response.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         this.setState({
           totalcount: JSON.parse(data).totalCount
         });
-        console.log(JSON.parse(data).totalCount);
+        // console.log(JSON.parse(data).totalCount);
       });
 
     console.log("device list fetch", newDevList);

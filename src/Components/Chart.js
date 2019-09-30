@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Line } from "react-chartjs-2";
+import { Container } from "@material-ui/core";
 
 export class Chart extends Component {
   constructor() {
@@ -7,6 +8,31 @@ export class Chart extends Component {
     this.state = {
       date: "",
       deviceData: "",
+      devicesList: [
+        {
+          devEUI: "3930323567378703",
+          datetime: "",
+          decodedData: {
+            deviceName: "",
+            meterReading: ""
+          }
+        },
+        {
+          devEUI: "70b3d5499433287e",
+          datetime: "",
+          decodedData: {
+            deviceName: "",
+            meterReading: ""
+          }
+        },
+        {
+          devEUI: "70b3d549902e26e1",
+          meterReading: "",
+          datetime: "",
+          deviceName: ""
+        }
+      ],
+
       chartData: {
         data: {
           labels: [
@@ -66,10 +92,6 @@ export class Chart extends Component {
       }
     };
   }
-
-  // static defaultProps = ,
-
-  //   options: ;
 
   getData = () => {
     this.setState({
@@ -160,38 +182,81 @@ export class Chart extends Component {
   };
 
   componentDidMount() {
-    fetch(`/api/devicedata?devEUI=3930323567378703`)
-      .then(res => res.json())
-      .then(data => {
-        console.log(JSON.parse(data).decodedData.meterReading);
-        console.log(JSON.parse(data).datetime);
-        console.log(JSON.parse(data).devEUI);
+    let { devicesList } = this.state;
+    let newDevList = [...devicesList];
 
-        this.setState({ date: JSON.parse(data).datetime });
-        this.setState({
-          deviceData: JSON.parse(data).decodedData.meterReading
+    for (let index in newDevList) {
+      console.log("index::::", newDevList[index]);
+      fetch(`/api/devicedata?devEUI=${newDevList[index].devEUI}`)
+        .then(res => res.json())
+        .then(data => {
+          console.log(JSON.parse(data).decodedData.meterReading);
+          console.log(JSON.parse(data).datetime);
+          console.log(JSON.parse(data).devEUI);
+          console.log("before>>>>>> device data", newDevList[index]);
+          newDevList[index].datetime = JSON.parse(data).datetime;
+          newDevList[index].meterReading = JSON.parse(
+            data
+          ).decodedData.meterReading;
+          this.setState({ date: JSON.parse(data).datetime });
+          this.setState({
+            deviceData: JSON.parse(data).decodedData.meterReading
+          });
+          this.manipulateChartData(
+            JSON.parse(data).datetime,
+            JSON.parse(data).decodedData.meterReading
+          );
+          console.log(
+            "###################### date: ",
+            this.state.date,
+            " reading: ",
+            this.state.deviceData
+          );
         });
-        this.manipulateChartData(
-          JSON.parse(data).datetime,
-          JSON.parse(data).decodedData.meterReading
-        );
-        console.log(
-          "###################### date: ",
-          this.state.date,
-          " reading: ",
-          this.state.deviceData
-        );
-      });
+    }
+
+    //   console.log(newDevList);
+    //   fetch(`/api/devicedata?devEUI=3930323567378703`)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //       console.log(JSON.parse(data).decodedData.meterReading);
+    //       console.log(JSON.parse(data).datetime);
+    //       console.log(JSON.parse(data).devEUI);
+
+    //       this.setState({ date: JSON.parse(data).datetime });
+    //       this.setState({
+    //         deviceData: JSON.parse(data).decodedData.meterReading
+    //       });
+    //       this.manipulateChartData(
+    //         JSON.parse(data).datetime,
+    //         JSON.parse(data).decodedData.meterReading
+    //       );
+    //       console.log(
+    //         "###################### date: ",
+    //         this.state.date,
+    //         " reading: ",
+    //         this.state.deviceData
+    //       );
+    //     });
   }
 
   render() {
     return (
-      <div>
-        <Line
-          data={this.state.chartData.data}
-          options={this.state.chartOptions}
-        />
-      </div>
+      <Container>
+        <div>
+          <Line
+            data={this.state.chartData.data}
+            options={this.state.chartOptions}
+          />
+        </div>
+
+        <div>
+          <Line
+            data={this.state.chartData.data}
+            options={this.state.chartOptions}
+          />
+        </div>
+      </Container>
     );
   }
 }
