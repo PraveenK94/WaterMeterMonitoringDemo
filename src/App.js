@@ -12,6 +12,4 @@ class App extends Component {
   }
 }
 
-console.log("hello app.js");
-
 export default App;

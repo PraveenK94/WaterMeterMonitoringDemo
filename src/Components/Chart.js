@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Line } from "react-chartjs-2";
-import { Container } from "@material-ui/core";
+import { Container, Grid } from "@material-ui/core";
 
 export class Chart extends Component {
   constructor() {
@@ -64,8 +64,8 @@ export class Chart extends Component {
               pointHoverBorderColor: "rgba(220,220,220,1)",
               pointHoverBorderWidth: 2,
               pointRadius: 1,
-              pointHitRadius: 10,
-              data: [320, 352, 401, 449, 516, 577, 634]
+              pointHitRadius: 10
+              //data: [320, 352, 401, 449, 516, 577, 634]
             }
           ]
         }
@@ -103,6 +103,7 @@ export class Chart extends Component {
   manipulateChartData = (dateVar, devData) => {
     var date = new Date(dateVar);
     var deviceData = devData;
+    console.log(deviceData);
     var chartYaxisData = [0, 0, 0, 0, 0, 0, 0];
     var chartXaxisData = ["", "", "", "", "", "", ""];
     var dateMonth = [
@@ -120,6 +121,7 @@ export class Chart extends Component {
       "Dec"
     ];
     chartYaxisData[6] = deviceData;
+    console.log(chartYaxisData);
     chartXaxisData[6] =
       "" + dateMonth[date.getMonth()] + " " + date.getFullYear();
 
@@ -189,6 +191,7 @@ export class Chart extends Component {
       console.log("index::::", newDevList[index]);
       fetch(`/api/devicedata?devEUI=${newDevList[index].devEUI}`)
         .then(res => res.json())
+
         .then(data => {
           console.log(JSON.parse(data).decodedData.meterReading);
           console.log(JSON.parse(data).datetime);
@@ -212,44 +215,46 @@ export class Chart extends Component {
             " reading: ",
             this.state.deviceData
           );
+
+          console.log(newDevList[2]);
+        });
+
+      console.log(newDevList);
+      fetch(`/api/devicedata?devEUI=3930323567378703`)
+        .then(res => res.json())
+        .then(data => {
+          console.log(JSON.parse(data).decodedData.meterReading);
+          console.log(JSON.parse(data).datetime);
+          console.log(JSON.parse(data).devEUI);
+
+          this.setState({ date: JSON.parse(data).datetime });
+          this.setState({
+            deviceData: JSON.parse(data).decodedData.meterReading
+          });
+          this.manipulateChartData(
+            JSON.parse(data).datetime,
+            JSON.parse(data).decodedData.meterReading
+          );
+          console.log(
+            "###################### date: ",
+            this.state.date,
+            " reading: ",
+            this.state.deviceData
+          );
         });
     }
-
-    //   console.log(newDevList);
-    //   fetch(`/api/devicedata?devEUI=3930323567378703`)
-    //     .then(res => res.json())
-    //     .then(data => {
-    //       console.log(JSON.parse(data).decodedData.meterReading);
-    //       console.log(JSON.parse(data).datetime);
-    //       console.log(JSON.parse(data).devEUI);
-
-    //       this.setState({ date: JSON.parse(data).datetime });
-    //       this.setState({
-    //         deviceData: JSON.parse(data).decodedData.meterReading
-    //       });
-    //       this.manipulateChartData(
-    //         JSON.parse(data).datetime,
-    //         JSON.parse(data).decodedData.meterReading
-    //       );
-    //       console.log(
-    //         "###################### date: ",
-    //         this.state.date,
-    //         " reading: ",
-    //         this.state.deviceData
-    //       );
-    //     });
   }
 
   render() {
     console.log(this.state.chartData.data);
     return (
       <Container>
-        <div>
+        <Grid>
           <Line
             data={this.state.chartData.data}
             options={this.state.chartOptions}
           />
-        </div>
+        </Grid>
       </Container>
     );
   }

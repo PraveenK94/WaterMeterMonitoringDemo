@@ -1,9 +1,8 @@
 import React from "react";
 import Box from "@material-ui/core/Box";
-
+import InputIcon from "@material-ui/icons/Input";
 import { Typography, Toolbar, Button, Container } from "@material-ui/core";
 import makeStyles from "@material-ui/styles/makeStyles";
-import { ok, fail } from "assert";
 
 function logout() {
   if (window.confirm("Are you sure to logout")) {
@@ -20,7 +19,7 @@ export default class Header extends React.Component {
     return (
       <Toolbar style={{ backgroundColor: "#3F51B5" }}>
         <Container>
-          <Typography variant="h5">
+          <Typography style={{ color: "#FFFFFF" }} variant="h5">
             Water Meter Monitoring
             <br />
             <Typography variant="caption">{Date()}</Typography>
@@ -28,11 +27,13 @@ export default class Header extends React.Component {
         </Container>
 
         <Container>
-          <Box position="right">
-            <Button onClick={logout} variant="outlined">
-              Logout
-            </Button>
-          </Box>
+          <InputIcon
+            onClick={logout}
+            style={{ color: "#FFFFFF" }}
+            variant="outlined"
+          ></InputIcon>
+
+          <Typography style={{ color: "#FFFFFF" }}>Logout</Typography>
         </Container>
       </Toolbar>
     );
