@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import clsx from "clsx";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
@@ -10,10 +10,15 @@ import Paper from "@material-ui/core/Paper";
 import Chart from "./Chart";
 import Orders from "./consumptionRate";
 import Header from "./Header";
-import Sidenav from "./sideNav";
 import Typography from "@material-ui/core/Typography";
 import "./Dashboard.css";
 import { Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
+import IconButton from "@material-ui/core/IconButton";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
 
 const drawerWidth = 240;
 
@@ -90,6 +95,11 @@ class Dashboard extends React.Component {
     console.log("device List", devicesList);
   }
 
+  HandleChartEvent = () => {
+    console.log("******************* Chart");
+    return <Route exact path="/Chart" component={Chart} />;
+  };
+
   render() {
     const theme = createMuiTheme({
       root: {
@@ -140,6 +150,28 @@ class Dashboard extends React.Component {
         height: 240
       }
     });
+    //Grid with info
+    const useStyles = makeStyles(theme => ({
+      root: {
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-around",
+        overflow: "hidden",
+        backgroundColor: theme.palette.background.paper
+      },
+      gridList: {
+        flexWrap: "nowrap",
+        // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+        transform: "translateZ(0)"
+      },
+      title: {
+        color: theme.palette.primary.light
+      },
+      titleBar: {
+        background:
+          "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)"
+      }
+    }));
 
     const { devicesList, redirect } = this.state;
 
@@ -170,9 +202,14 @@ class Dashboard extends React.Component {
                 marginTop: "55px"
               }}
             >
-              {/* <Sidenav /> */}
               <Grid container spacing={3}>
-                <Grid item xs={12} md={4} lg={3}>
+                <Grid
+                  onClick={this.HandleChartEvent}
+                  item
+                  xs={12}
+                  md={4}
+                  lg={3}
+                >
                   <Paper className={clsx(theme.paper, theme.fixedHeight)}>
                     <Typography variant="h6" color="primary">
                       Customer A
@@ -193,7 +230,13 @@ class Dashboard extends React.Component {
                   </Paper>
                 </Grid>
 
-                <Grid item xs={12} md={4} lg={3}>
+                <Grid
+                  onClick={this.HandleChartEvent}
+                  item
+                  xs={12}
+                  md={4}
+                  lg={3}
+                >
                   <Paper className={clsx(theme.paper, theme.fixedHeight)}>
                     <Typography variant="h6" color="primary">
                       Customer B

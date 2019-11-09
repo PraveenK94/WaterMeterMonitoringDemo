@@ -64,8 +64,8 @@ export class Chart extends Component {
               pointHoverBorderColor: "rgba(220,220,220,1)",
               pointHoverBorderWidth: 2,
               pointRadius: 1,
-              pointHitRadius: 10
-              //data: [320, 352, 401, 449, 516, 577, 634]
+              pointHitRadius: 10,
+              data: [320, 352, 401, 449, 516, 577, 634]
             }
           ]
         }
@@ -219,29 +219,31 @@ export class Chart extends Component {
           console.log(newDevList[2]);
         });
 
-      console.log(newDevList);
-      fetch(`/api/devicedata?devEUI=3930323567378703`)
-        .then(res => res.json())
-        .then(data => {
-          console.log(JSON.parse(data).decodedData.meterReading);
-          console.log(JSON.parse(data).datetime);
-          console.log(JSON.parse(data).devEUI);
+      //   console.log(newDevList);
+      //   fetch(`/api/devicedata?devEUI=3930323567378703`)
+      //     .then(res => res.json())
+      //     .then(data => {
+      //       console.log(JSON.parse(data).decodedData.meterReading);
+      //       console.log(JSON.parse(data).datetime);
+      //       console.log(JSON.parse(data).devEUI);
 
-          this.setState({ date: JSON.parse(data).datetime });
-          this.setState({
-            deviceData: JSON.parse(data).decodedData.meterReading
-          });
-          this.manipulateChartData(
-            JSON.parse(data).datetime,
-            JSON.parse(data).decodedData.meterReading
-          );
-          console.log(
-            "###################### date: ",
-            this.state.date,
-            " reading: ",
-            this.state.deviceData
-          );
-        });
+      //       this.setState({ date: JSON.parse(data).datetime });
+      //       this.setState({
+      //         deviceData: JSON.parse(data).decodedData.meterReading
+      //       });
+      //       this.manipulateChartData(
+      //         JSON.parse(data).datetime,
+      //         JSON.parse(data).decodedData.meterReading
+      //       );
+      //       console.log(
+      //         "###################### date: ",
+      //         this.state.date,
+      //         " reading: ",
+      //         this.state.deviceData
+      //       );
+      //     });
+      // }
+      // }
     }
   }
 

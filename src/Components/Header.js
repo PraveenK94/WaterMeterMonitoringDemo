@@ -1,8 +1,8 @@
 import React from "react";
-import Box from "@material-ui/core/Box";
+//import Box from "@material-ui/core/Box";
 import InputIcon from "@material-ui/icons/Input";
-import { Typography, Toolbar, Button, Container } from "@material-ui/core";
-import makeStyles from "@material-ui/styles/makeStyles";
+import { Typography, Toolbar, Container } from "@material-ui/core";
+//import makeStyles from "@material-ui/styles/makeStyles";
 
 function logout() {
   if (window.confirm("Are you sure to logout")) {
